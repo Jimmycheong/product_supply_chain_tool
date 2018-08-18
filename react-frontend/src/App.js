@@ -11,12 +11,13 @@ class App extends Component {
     return (
       <div>
         <Grid container> 
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <SideMenu />
           </Grid>       
           <Grid item xs={8}>
             <Inventory />
-          </Grid>       
+          </Grid>
+          <Grid item xs={2}></Grid>              
         </Grid>
       </div>
     );
