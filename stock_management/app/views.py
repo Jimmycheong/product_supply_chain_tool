@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from app.models import MachineModel
-from app.serializers import MachineModelSerializer
+from app.models import (MachineModel, MachinePart)
+from app.serializers import (MachineModelSerializer, MachinePartSerializer)
 from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
@@ -14,3 +14,9 @@ def list_all_models(request):
         serializer = MachineModelSerializer(all_models, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+@csrf_exempt
+def list_all_parts(request): 
+    if request.method == "GET":
+        all_parts = MachinePart.objects.all()
+        serializer = MachinePartSerializer(all_parts, many=True)
+        return JsonResponse(serializer.data, safe=False)

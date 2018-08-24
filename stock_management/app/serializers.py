@@ -9,8 +9,8 @@ class MachineModelSerializer(serializers.Serializer):
     stock_quantity = serializers.IntegerField(required=False)
     order_date = serializers.DateTimeField()
     expected_arrival_date = serializers.DateTimeField()
+    parts_used_to_make = serializers.HStoreField(child=serializers.CharField(max_length=100))
     created = serializers.DateTimeField()
-
 
     def create(self, validated_data):
         """
@@ -29,3 +29,12 @@ class MachineModelSerializer(serializers.Serializer):
         instance.expected_arrival_date = validated_data.get('expected_arrival_date', instance.expected_arrival_date)
         instance.save()
         return instance
+
+class MachinePartSerializer(serializers.Serializer):
+    
+    id = serializers.IntegerField(read_only=True)
+    part_id_no = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    quantity = serializers.IntegerField(required=False)
+    suppliers = serializers.ListField(
+        child = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    )
