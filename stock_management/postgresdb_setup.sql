@@ -1,0 +1,8 @@
+CREATE DATABASE uncle_stock;
+
+CREATE USER admin WITH PASSWORD 'admin';
+
+GRANT ALL PRIVILEGES ON DATABASE uncle_stock TO admin;
+
+CREATE EXTENSION hstore;
+
